@@ -74,15 +74,19 @@ def draw(filename,size):
 
 
 ##рисуем рамки
+ int x = 1
+ <script>
+ <button onclick="alert('Hello\nHow are you?')">Try it</button>
+ </script>
  size=int(size)
  height = 224
  width = 224
  img= np.array(img.resize((height,width)))/255.0
  print(size)
- img[:size,:,1] = 0
- img[:,0:size,1] = 0
- img[:,224-size:,1] = 0
- img[224-size:,:,1] = 0
+ img[:size,:,x] = 0
+ img[:,0:size,x] = 0
+ img[:,224-size:,x] = 0
+ img[224-size:,:,x] = 0
 ##сохраняем новое изображение
  img = Image.fromarray((img * 255).astype(np.uint8))
  print(img)
