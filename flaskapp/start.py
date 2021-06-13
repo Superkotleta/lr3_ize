@@ -32,7 +32,8 @@ class NetForm(FlaskForm):
  # валидатор проверяет введение данных после нажатия кнопки submit
  # и указывает пользователю ввести данные если они не введены
  # или неверны
- #size = StringField('size', validators = [DataRequired()])
+ rcolor = 0
+ size = StringField('size', validators = [DataRequired()])
  rcolor = StringField('choose frame color', validators = [DataRequired()])
  # поле загрузки файла
  # здесь валидатор укажет ввести правильные файлы
@@ -76,7 +77,7 @@ def draw(filename,size):
 
 ##рисуем рамки
  #int rcolor = 1
- #size=int(size)
+ size=int(size)
  rcolor = int(rcolor)
  height = 224
  width = 224
