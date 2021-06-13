@@ -4,12 +4,6 @@
 {% block title %}This is an page{% endblock %}
 <!-- блок body -->
 {% block content %}
-
- <script>
-  var rcolor;
- <button onclick="prompt("Choose frame color 0-red 1-green 2-blue", "1");">Choose frame color</button>
- </script>
-
 {{ wtf.quick_form(form, method='post',enctype="multipart/form-data", action="net") }}
 <!-- один из стандартных тэгов html - заголовок второго уровня -->
 <h2>grafik: </h2> 
