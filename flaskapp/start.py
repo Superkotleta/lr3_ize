@@ -56,8 +56,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 ## функция для оброботки изображения 
-def draw(filename,rcolor):
-#def draw(filename,size):
+
+def draw(filename,size,rcolor):
  ##открываем изображение 
  print(filename)
  img= Image.open(filename)
@@ -116,9 +116,10 @@ def net():
   filename = os.path.join('./static', secure_filename(form.upload.data.filename))
  
   sz=form.size.data
+  sr=form.rcolor.data
  
   form.upload.data.save(filename)
-  newfilename, grname = draw(filename,sz)
+  newfilename, grname = draw(filename,sz,sr)
  # передаем форму в шаблон, так же передаем имя файла и результат работы нейронной
  # сети если был нажат сабмит, либо передадим falsy значения
  
