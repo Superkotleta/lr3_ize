@@ -56,7 +56,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 ## функция для оброботки изображения 
-def draw(filename,size):
+def draw(filename,rcolor):
+#def draw(filename,size):
  ##открываем изображение 
  print(filename)
  img= Image.open(filename)
@@ -77,7 +78,7 @@ def draw(filename,size):
 
 ##рисуем рамки
  #int rcolor = 1
- def draw(filename,rcolor):
+ 
  size=int(size)
  rcolor = int(rcolor)
  height = 224
