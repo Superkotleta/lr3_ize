@@ -32,7 +32,7 @@ class NetForm(FlaskForm):
  # валидатор проверяет введение данных после нажатия кнопки submit
  # и указывает пользователю ввести данные если они не введены
  # или неверны
-
+ #rcolor = 0
  size = StringField('size', validators = [DataRequired()])
  rcolor = StringField('choose frame color', validators = [DataRequired()])
  # поле загрузки файла
@@ -57,6 +57,7 @@ import seaborn as sns
 
 ## функция для оброботки изображения 
 def draw(filename,size):
+def draw(filename,rcolor):
  ##открываем изображение 
  print(filename)
  img= Image.open(filename)
@@ -84,7 +85,7 @@ def draw(filename,size):
  img= np.array(img.resize((height,width)))/255.0
  print(size)
  print(rcolor)
- rcolor = 0
+ #rcolor = 0
  img[:size,:,rcolor] = 0
  img[:,0:size,rcolor] = 0
  img[:,224-size:,rcolor] = 0
