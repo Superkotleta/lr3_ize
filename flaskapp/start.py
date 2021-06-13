@@ -83,10 +83,16 @@ def draw(filename,size):
  img= np.array(img.resize((height,width)))/255.0
  print(size)
  print(rcolor)
- img[:size,:,rcolor] = 0
- img[:,0:size,rcolor] = 0
- img[:,224-size:,rcolor] = 0
- img[224-size:,:,rcolor] = 0
+ if (rcolor >= 0 && rcolor <= 2)
+  img[:size,:,rcolor] = 0
+  img[:,0:size,rcolor] = 0
+  img[:,224-size:,rcolor] = 0
+  img[224-size:,:,rcolor] = 0
+ else
+  img[:size,:,1] = 0
+  img[:,0:size,1] = 0
+  img[:,224-size:,1] = 0
+  img[224-size:,:,1] = 0
 ##сохраняем новое изображение
  img = Image.fromarray((img * 255).astype(np.uint8))
  print(img)
