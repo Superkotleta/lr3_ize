@@ -76,7 +76,7 @@ def draw(filename,size):
 
 ##рисуем рамки
  #int rcolor = 1
- rcolor = int(rcolor)
+ int rcolor = int(rcolor)
  size=int(size)
  height = 224
  width = 224
