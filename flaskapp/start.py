@@ -57,7 +57,6 @@ import seaborn as sns
 
 ## функция для оброботки изображения 
 def draw(filename,size):
-def draw(filename,rcolor):
  ##открываем изображение 
  print(filename)
  img= Image.open(filename)
@@ -78,6 +77,7 @@ def draw(filename,rcolor):
 
 ##рисуем рамки
  #int rcolor = 1
+ def draw(filename,rcolor):
  size=int(size)
  rcolor = int(rcolor)
  height = 224
