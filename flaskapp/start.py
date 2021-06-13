@@ -74,16 +74,16 @@ def draw(filename,size):
 
 
 ##рисуем рамки
- int rcolor = 1
+ #int rcolor = 1
  size=int(size)
  height = 224
  width = 224
  img= np.array(img.resize((height,width)))/255.0
  print(size)
- img[:size,:,rcolor] = 0
- img[:,0:size,rcolor] = 0
- img[:,224-size:,rcolor] = 0
- img[224-size:,:,rcolor] = 0
+ img[:size,:,1] = 0
+ img[:,0:size,1] = 0
+ img[:,224-size:,1] = 0
+ img[224-size:,:,1] = 0
 ##сохраняем новое изображение
  img = Image.fromarray((img * 255).astype(np.uint8))
  print(img)
