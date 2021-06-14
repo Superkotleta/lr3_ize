@@ -82,7 +82,7 @@ def draw(filename,size,rcolor,invlevel):
  
  size=int(size)
  rcolor = int(rcolor)
- invlevel = double(invlevel)
+ invlevel = float(invlevel)
  height = 224
  width = 224
  img= np.array(img.resize((height,width)))/255.0
