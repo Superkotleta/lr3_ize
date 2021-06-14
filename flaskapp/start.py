@@ -34,8 +34,9 @@ class NetForm(FlaskForm):
  # или неверны
  #rcolor = 0
  size = StringField('size', validators = [DataRequired()])
- rcolor = StringField('choose frame color ("0" "1" "2")', validators = [DataRequired()])
- invlevel = StringField('choose level of intensity (0.0 - 1)', validators = [DataRequired()])
+ rcolor = StringField('choose level of red intensity (0.0 - 1)', validators = [DataRequired()])
+ gcolor = StringField('choose level of green intensity (0.0 - 1)', validators = [DataRequired()])
+ bcolor = StringField('choose level of blue intensity (0.0 - 1)', validators = [DataRequired()])
  # поле загрузки файла
  # здесь валидатор укажет ввести правильные файлы
  upload = FileField('Load image', validators=[
@@ -58,7 +59,7 @@ import seaborn as sns
 
 ## функция для оброботки изображения 
 
-def draw(filename,size,rcolor,invlevel):
+def draw(filename,size,rcolor,gcolor,bcolor):
  ##открываем изображение 
  print(filename)
  img= Image.open(filename)
@@ -81,8 +82,10 @@ def draw(filename,size,rcolor,invlevel):
  #int rcolor = 1
  
  size=int(size)
- rcolor = int(rcolor)
- invlevel = float(invlevel)
+ rcolor = float(rcolor)
+ gcolor = float(gcolor)
+ bcolor = float(bcolor)
+ 
  height = 224
  width = 224
  img= np.array(img.resize((height,width)))/255.0
@@ -95,10 +98,21 @@ def draw(filename,size,rcolor,invlevel):
  img[:,224-size:,:] = 0
  img[224-size:,:,:] = 0
  
- img[:size,:,rcolor] = invlevel
- img[:,0:size,rcolor] = invlevel
- img[:,224-size:,rcolor] = invlevel
- img[224-size:,:,rcolor] = invlevel
+ img[:,0:size,0] = rcolor
+ img[:,224-size:,0] = rcolor
+ img[224-size:,:,0] = rcolor
+ img[224-size:,:,0] = rcolor
+
+
+ img[:size,:,1] = gcolor
+ img[:,0:size,1] = gcolor
+ img[:,224-size:,1] = gcolor
+ img[224-size:,:,1] = gcolor
+
+ img[:size,:,2] = bcolor
+ img[:,0:size,2] = bcolor
+ img[:,224-size:,2] = bcolor
+ img[224-size:,:,2] = bcolor
 ##сохраняем новое изображение
  img = Image.fromarray((img * 255).astype(np.uint8))
  print(img)
@@ -125,11 +139,12 @@ def net():
  
   sz=form.size.data
   sr=form.rcolor.data
-  siz=form.invlevel.data
+  sg=form.gcolor.data
+  sb=form.bcolor.data
   
  
   form.upload.data.save(filename)
-  newfilename, grname = draw(filename,sz,sr,siz)
+  newfilename, grname = draw(filename,sz,sr,sg,sb)
  # передаем форму в шаблон, так же передаем имя файла и результат работы нейронной
  # сети если был нажат сабмит, либо передадим falsy значения
  
@@ -138,3 +153,4 @@ def net():
 
 if __name__ == "__main__":
  app.run(host='127.0.0.1',port=5000)
+ 
