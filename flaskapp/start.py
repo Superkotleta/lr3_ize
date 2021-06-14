@@ -34,7 +34,9 @@ class NetForm(FlaskForm):
  # или неверны
  #rcolor = 0
  size = StringField('size', validators = [DataRequired()])
- rcolor = StringField('choose frame color ("0" "1" "2")', validators = [DataRequired()])
+ rcolor = StringField('red 0/1', validators = [DataRequired()])
+ gcolor = StringField('green 0/1', validators = [DataRequired()])
+ bcolor = StringField('blue 0/1', validators = [DataRequired()])
  invlevel = StringField('choose level of intensity (0.0 - 1)', validators = [DataRequired()])
  # поле загрузки файла
  # здесь валидатор укажет ввести правильные файлы
@@ -58,7 +60,7 @@ import seaborn as sns
 
 ## функция для оброботки изображения 
 
-def draw(filename,size,rcolor,invlevel):
+def draw(filename,size,rcolor,invlevel,gcolor,bcolor):
  ##открываем изображение 
  print(filename)
  img= Image.open(filename)
@@ -99,6 +101,16 @@ def draw(filename,size,rcolor,invlevel):
  img[:,0:size,rcolor] = invlevel
  img[:,224-size:,rcolor] = invlevel
  img[224-size:,:,rcolor] = invlevel
+ 
+ img[:size,:,gcolor] = invlevel
+ img[:,0:size,gcolor] = invlevel
+ img[:,224-size:,gcolor] = invlevel
+ img[224-size:,:,gcolor] = invlevel
+ 
+ img[:size,:,bcolor] = invlevel
+ img[:,0:size,bcolor] = invlevel
+ img[:,224-size:,bcolor] = invlevel
+ img[224-size:,:,bcolor] = invlevel
 ##сохраняем новое изображение
  img = Image.fromarray((img * 255).astype(np.uint8))
  print(img)
@@ -125,11 +137,13 @@ def net():
  
   sz=form.size.data
   sr=form.rcolor.data
+  sg=form.gcolor.data
+  sb=form.bcolor.data
   siz=form.invlevel.data
   
  
   form.upload.data.save(filename)
-  newfilename, grname = draw(filename,sz,sr,siz)
+  newfilename, grname = draw(filename,sz,sr,siz,sg,sb)
  # передаем форму в шаблон, так же передаем имя файла и результат работы нейронной
  # сети если был нажат сабмит, либо передадим falsy значения
  
