@@ -89,6 +89,12 @@ def draw(filename,size,rcolor,invlevel):
  print(size)
  print(rcolor)
  #rcolor = 0
+ 
+ img[:size,:,:] = 0
+ img[:,0:size,:] = 0
+ img[:,224-size:,:] = 0
+ img[224-size:,:,:] = 0
+ 
  img[:size,:,rcolor] = invlevel
  img[:,0:size,rcolor] = invlevel
  img[:,224-size:,rcolor] = invlevel
